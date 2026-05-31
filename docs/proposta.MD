@@ -6,20 +6,21 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 ## 1. Nome provisório do jogo
 
-Escreva aqui o nome provisório do jogo.
+> Corrida de carro
 
 Exemplo:
 
-> Corrida dos Obstáculos
+Corrida dos Obstáculos
 
 ## 2. Integrantes do grupo
 
 Liste os integrantes do grupo.
 
-- Nome 1:
-- Nome 2:
-- Nome 3:
-- Nome 4:
+> - Estevão de Castro Jung
+> - Fernando Pereira de Vasconcellos
+> - Guilherme Gonçalves Meireles
+> - João Pedro Spósito Pereira Cézar
+> - Paulo Henrique Pereira de Sousa
 
 ## 3. Tipo de jogo
 
@@ -42,7 +43,7 @@ Exemplos:
 
 Tipo escolhido pelo grupo:
 
-> Escreva aqui.
+> Jogo de corrida arcade de sobrevivência com rotação progressiva de cenário (Top-Down Racer).
 
 ## 4. Descrição geral do jogo
 
@@ -57,7 +58,7 @@ Procure responder:
 
 Descrição:
 
-> Escreva aqui.
+> O jogador controla um veículo em uma pista pré-construída vista de cima. A movimentação é feita através do teclado (virar esquerda e direita). Conforme o cronômetro avança, a câmera ou o mapa inteiro começa a girar continuamente na tela, e a velocidade dessa rotação aumenta com o tempo. O desafio é adaptar a coordenação motora para dirigir corretamente, mesmo quando o mapa estiver de lado ou de cabeça para baixo
 
 ## 5. Objetivo do jogador
 
@@ -75,7 +76,9 @@ Exemplos:
 
 Objetivo:
 
-> Escreva aqui.
+> - Ficar o maior tempo possível
+> - Não atingir obstáculos
+> - Manter o controle do veículo enquanto o mapa progride aumentando a dificuldade
 
 ## 6. Regras principais
 
@@ -91,11 +94,10 @@ Exemplo:
 
 Regras do grupo:
 
-- Regra 1:
-- Regra 2:
-- Regra 3:
-- Regra 4:
-- Regra 5:
+> - Regra 1: O jogador começa com 3 vidas e 0 segundos no cronômetro.
+> - Regra 2: A velocidade de rotação do mapa na tela é proporcional ao tempo do cronômetro (ex: a cada 10 segundos, o giro fica mais rápido).
+> - Regra 3: Colidir com os obstáculos elimina uma vida
+> - Regra 4: Somente um jogador joga por vez
 
 ## 7. Condição de vitória
 
@@ -111,7 +113,7 @@ Exemplos:
 
 Condição de vitória:
 
-> Escreva aqui.
+> Ter o melhor tempo na tabela de ranking
 
 ## 8. Condição de derrota ou encerramento
 
@@ -127,7 +129,7 @@ Exemplos:
 
 Condição de derrota ou encerramento:
 
-> Escreva aqui.
+> Ficar um primeiro no ranking
 
 ## 9. Elementos previstos no jogo
 
@@ -137,41 +139,41 @@ Descreva os principais elementos que farão parte do jogo.
 
 Exemplo:
 
-> Um personagem controlado pelas setas do teclado.
+Um personagem controlado pelas setas do teclado.
 
 Descrição:
 
-> Escreva aqui.
+> - Jogador: O veículo principal que corre pela pista.
 
 ## Obstáculos, inimigos ou desafios
 
 Exemplo:
 
-> Obstáculos aparecem em posições aleatórias e devem ser evitados.
+Obstáculos aparecem em posições aleatórias e devem ser evitados.
 
 Descrição:
 
-> Escreva aqui.
+> - Cenário: Um mapa pré-desenhado com obstáculos (ex: asfalto) cercado por limites rígidos (paredes ou grama)
 
 ## Itens, alvos ou objetos de interação
 
 Exemplo:
 
-> Moedas aparecem na tela e aumentam a pontuação quando coletadas.
+Moedas aparecem na tela e aumentam a pontuação quando coletadas.
 
 Descrição:
 
-> Escreva aqui.
+> - Progresso e HUD: Um cronômetro visível, um contador de 3 vidas (corações)
 
 ## Pontuação, vidas, tempo ou progresso
 
 Exemplo:
 
-> O jogador começa com 3 vidas e ganha 10 pontos por item coletado.
+O jogador começa com 3 vidas e ganha 10 pontos por item coletado.
 
 Descrição:
 
-> Escreva aqui.
+> - Progresso e HUD: Um cronômetro visível, um contador de 3 vidas (corações)
 
 ## 10. Controles previstos
 

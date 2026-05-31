@@ -6,10 +6,11 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Integrantes do grupo
 
-- Nome do integrante 1
-- Nome do integrante 2
-- Nome do integrante 3
-- Nome do integrante 4
+- Estevão de Castro Jung
+- Fernando Pereira de Vasconcellos
+- Guilherme Gonçalves Meireles
+- João Pedro Spósito Pereira Cézar
+- Paulo Henrique Pereira de Sousa
 
 ## Estrutura do projeto
 
