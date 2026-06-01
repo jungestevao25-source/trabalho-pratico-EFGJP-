@@ -6,7 +6,7 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 ## 1. Nome provisório do jogo
 
-> Corrida de carro
+> - Corrida de carro
 
 Exemplo:
 
@@ -43,7 +43,7 @@ Exemplos:
 
 Tipo escolhido pelo grupo:
 
-> Jogo de corrida arcade de sobrevivência com rotação progressiva de cenário (Top-Down Racer).
+> - Jogo de corrida arcade de sobrevivência com rotação progressiva de cenário (Top-Down Racer).
 
 ## 4. Descrição geral do jogo
 
@@ -58,7 +58,7 @@ Procure responder:
 
 Descrição:
 
-> O jogador controla um veículo em uma pista pré-construída vista de cima. A movimentação é feita através do teclado (virar esquerda e direita). Conforme o cronômetro avança, a câmera ou o mapa inteiro começa a girar continuamente na tela, e a velocidade dessa rotação aumenta com o tempo. O desafio é adaptar a coordenação motora para dirigir corretamente, mesmo quando o mapa estiver de lado ou de cabeça para baixo
+> - O jogador controla um veículo em uma pista pré-construída vista de cima. A movimentação é feita através do teclado (virar esquerda e direita). Conforme o cronômetro avança, a câmera ou o mapa inteiro começa a girar continuamente na tela, e a velocidade dessa rotação aumenta com o tempo. O desafio é adaptar a coordenação motora para dirigir corretamente, mesmo quando o mapa estiver de lado ou de cabeça para baixo
 
 ## 5. Objetivo do jogador
 
@@ -113,7 +113,7 @@ Exemplos:
 
 Condição de vitória:
 
-> Ter o melhor tempo na tabela de ranking
+> - Ter o melhor tempo na tabela de ranking
 
 ## 8. Condição de derrota ou encerramento
 
@@ -129,7 +129,7 @@ Exemplos:
 
 Condição de derrota ou encerramento:
 
-> Ficar um primeiro no ranking
+> - Não ficar um primeiro lugar no ranking
 
 ## 9. Elementos previstos no jogo
 
@@ -163,7 +163,7 @@ Moedas aparecem na tela e aumentam a pontuação quando coletadas.
 
 Descrição:
 
-> - Progresso e HUD: Um cronômetro visível, um contador de 3 vidas (corações)
+> --------------
 
 ## Pontuação, vidas, tempo ou progresso
 
@@ -190,9 +190,11 @@ Exemplo:
 
 Controles do grupo:
 
-- Tecla/comando:
-- Tecla/comando:
-- Tecla/comando:
+> - W: Mover Para Frente
+> - S: Mover Para Trás
+> - A: Mover Para a Esquerda
+> - D: Mover Para a Direita
+> - ESC: Sair do Jogo
 
 ## 11. Organização inicial do código
 
@@ -208,8 +210,9 @@ Exemplo:
 
 Organização planejada:
 
-> Escreva aqui.
-
+> - `main.py`: Inicia o loop, gerencia o HUD (vidas, tempo) e a condição de Game Over/Vitória.
+> - `carro.py`: Controla as físicas de aceleração, frenagem e rotação do veículo baseadas nos inputs do teclado.
+> - `pista.py`: Carrega o mapa, aplica a rotação baseada no tempo e lida com as caixas de colisão (hitboxes).
 
 ## 12. Recursos externos previstos
 
@@ -224,11 +227,13 @@ Exemplo:
 
 Recursos previstos:
 
-> Escreva aqui.
+> - Sprite de um carro visto de cima
+> - imagem de pista de corrida
+> - Obstáculos e cenarios obtidos de bancos gratuitos
 
 Caso não pretenda utilizar recursos externos, escreva:
 
-> Não pretendemos utilizar recursos externos.
+> - Não pretendemos utilizar recursos externos.
 
 ## 13. Principais dificuldades esperadas
 
@@ -247,9 +252,9 @@ Exemplos:
 
 Dificuldades previstas:
 
-- Dificuldade 1:
-- Dificuldade 2:
-- Dificuldade 3:
+> - Dificuldade 1:  Sincronizar a colisão real do veículo com o mapa girando (garantir que a parede física gire exatamente junto com a parede desenhada na tela).
+> - Dificuldade 2: Balancear o quão rápido o mapa deve girar para ser desafiador, sem causar náusea excessiva no jogador.
+> - Dificuldade 3: Randomização dos obstáculos no mapa
 
 ## 14. Escopo mínimo para a entrega final
 
@@ -259,11 +264,11 @@ Esta seção é importante para evitar que o grupo escolha uma ideia grande dema
 
 Exemplo:
 
-> A versão mínima do jogo terá um personagem controlado pelo teclado, obstáculos aparecendo na tela, sistema de vidas, sistema de pontuação e tela de fim de jogo.
+A versão mínima do jogo terá um personagem controlado pelo teclado, obstáculos aparecendo na tela, sistema de vidas, sistema de pontuação e tela de fim de jogo.
 
 Escopo mínimo:
 
-> Escreva aqui.
+> - Um mapa estático desenhado em 2D. Um veículo controlado pelo teclado (com física básica de aceleração e rotação do próprio veículo). Um sistema de colisão que subtrai vidas ao tocar nas bordas e obstáculos, e a lógica principal que faz a imagem do mapa rotacionar na tela de acordo com o tempo.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
@@ -283,6 +288,6 @@ Exemplos:
 
 Melhorias possíveis:
 
-- Melhoria 1:
-- Melhoria 2:
-- Melhoria 3:
+> - Melhoria 1: Mecânica de especial
+> - Melhoria 2: Rastros de pneu no asfalto e fumaça.
+> - Melhoria 3: Poderes para facilitar o progresso.
