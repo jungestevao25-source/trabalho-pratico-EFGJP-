@@ -12,8 +12,8 @@ from src.config import (
     CINZA,
     TITULO_JOGO,
 )
-from src.jogo.game import Carro
-import street.street as street
+from src.game import Carro
+import src.street as street
 
 pygame.init()
 FONTE_TITULO = pygame.font.Font(None, 64)
