@@ -5,7 +5,7 @@ pygame.init()
 
 class carro:
     def __init__(self, x, y):
-        self.rect = pygame.rect(x, y, 40, 70)
+        self.rect = pygame.Rect(x, y, 40, 70)
         self.cor = (0,128, 255)
         self.velocidade = 6
     def mover(self, teclas, limite_pista):
@@ -24,5 +24,5 @@ class carro:
         if self.rect.collidelist(hitboxes_obstaculos) != -1:
             return True
         return False
-    def range(self,tela):
+    def desenhar(self, tela):
         pygame.draw.rect(tela, self.cor, self.rect)
