@@ -14,6 +14,7 @@ from src.config import (
 )
 from src.game import Carro
 import src.street as street
+import src.leaderboard as leaderboard
 
 pygame.init()
 FONTE_TITULO = pygame.font.Font(None, 64)
@@ -31,7 +32,6 @@ nomes_jogadores = []
 texto_input = ""
 mensagem_erro = ""
 
-leaderboard = {}
 caixa_texto = pygame.Rect(200, 300, 400, 50)
 
 
@@ -45,7 +45,39 @@ def desenhar_texto(texto, fonte, cor, x, y, centralizado=True):
     tela.blit(superficie, retangulo)
 
 
-def executar_jogo(nomes):
+def tela_leaderboard():
+    rodando = True
+
+    while rodando:
+        clock.tick(FPS)
+        tela.fill(PRETO)
+
+        desenhar_texto("LEADERBOARD", FONTE_TITULO, BRANCO, LARGURA_TELA // 2, 60)
+
+        ranking = leaderboard.carregar_leaderboard()
+
+        y = 150
+        if not ranking:
+            desenhar_texto("Nenhuma pontuação registrada ainda.", FONTE_PEQUENA, CINZA, LARGURA_TELA // 2, y)
+        else:
+            for i, jogador in enumerate(ranking):
+                texto = f"{i + 1}. {jogador['nome']} - {jogador['pontos']}"
+                desenhar_texto(texto, FONTE_TEXTO, BRANCO, LARGURA_TELA // 2, y)
+                y += 40
+
+        desenhar_texto("ESC para voltar", FONTE_PEQUENA, CINZA, LARGURA_TELA // 2, ALTURA_TELA - 40)
+
+        pygame.display.flip()
+
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:
+                rodando = False
+
+def executar_jogo(nome):
     carro_jogador = Carro(
         street.X_ESTRADA + (street.LARGURA_ESTRADA - 40) // 2,
         ALTURA_TELA - 120,
@@ -53,16 +85,25 @@ def executar_jogo(nomes):
     deslocamento_linhas = 0
     rodando = True
 
+    tempo_acumulado = 0.0
+    pontos = 0
+
+    clock.tick(FPS)
+
     while rodando:
-        clock.tick(FPS)
+        dt = clock.tick(FPS) / 1000
+        tempo_acumulado += dt
+
+        while tempo_acumulado >= 1:
+            pontos += 1
+            tempo_acumulado -= 1
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
-                rodando = False
-                return
+                pygame.quit()
+                sys.exit()
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:
-                rodando = False
-                return
+               rodando = False
 
         teclas = pygame.key.get_pressed()
         carro_jogador.mover(teclas, street.obter_limites_pista())
@@ -71,11 +112,13 @@ def executar_jogo(nomes):
         street.desenhar_pista(tela, deslocamento_linhas)
         carro_jogador.desenhar(tela)
 
-        desenhar_texto("Pressione ESC para sair", FONTE_SCORE, BRANCO, 10, 10, centralizado=False)
-        if nomes:
-            desenhar_texto(f"Jogadores: {', '.join(nomes)}", FONTE_SCORE, BRANCO, 10, 35, centralizado=False)
+        desenhar_texto("Pressione ESC para encerrar sua vez", FONTE_SCORE, BRANCO, 10, 10, centralizado=False)
+        desenhar_texto(f"Jogador: {nome}", FONTE_SCORE, BRANCO, 10, 35, centralizado=False)
+        desenhar_texto(f"Pontos: {pontos}", FONTE_SCORE, BRANCO, 10, 60, centralizado=False)
 
         pygame.display.flip()
+
+    return pontos
 
 
 rodando = True
@@ -90,7 +133,9 @@ while rodando:
 
         if evento.type == pygame.KEYDOWN:
             if estado_atual == "DIGITAR_NUM_JOGADORES":
-                if evento.key == pygame.K_RETURN:
+                if evento.key == pygame.K_TAB:
+                    tela_leaderboard()
+                elif evento.key == pygame.K_RETURN:
                     if texto_input.isdigit() and int(texto_input) > 0:
                         num_jogadores = int(texto_input)
                         estado_atual = "DIGITAR_NOMES"
@@ -110,15 +155,18 @@ while rodando:
                     nome_limpo = texto_input.strip()
                     if nome_limpo != "":
                         nomes_jogadores.append(nome_limpo)
-                        leaderboard[nome_limpo] = 0
                         texto_input = ""
                         if len(nomes_jogadores) == num_jogadores:
-                            executar_jogo(nomes_jogadores)
+                            for jogador in nomes_jogadores:
+                                pontos = executar_jogo(jogador)
+                                leaderboard.adicionar_pontuacao(jogador, pontos)
+
+                                tela_leaderboard()
+
                             texto_input = ""
                             estado_atual = "DIGITAR_NUM_JOGADORES"
                             num_jogadores = 0
                             nomes_jogadores.clear()
-                            leaderboard.clear()
                 elif evento.key == pygame.K_BACKSPACE:
                     texto_input = texto_input[:-1]
                 else:
@@ -130,6 +178,7 @@ while rodando:
     if estado_atual == "DIGITAR_NUM_JOGADORES":
         desenhar_texto("Digite a quantidade de jogadores:", FONTE_TEXTO, CINZA, LARGURA_TELA // 2, 200)
         desenhar_texto("(Pressione ENTER para confirmar)", FONTE_PEQUENA, CINZA, LARGURA_TELA // 2, 400)
+        desenhar_texto("(TAB para ver o leaderboard)", FONTE_PEQUENA, CINZA, LARGURA_TELA // 2, 450)
 
         if mensagem_erro:
             desenhar_texto(mensagem_erro, FONTE_PEQUENA, VERMELHO, LARGURA_TELA // 2, 450)
