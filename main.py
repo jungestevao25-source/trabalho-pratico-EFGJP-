@@ -88,6 +88,9 @@ def executar_jogo(nome):
     tempo_acumulado = 0.0
     pontos = 0
 
+    obstaculos = []
+    contador_spawn = 0
+
     clock.tick(FPS)
 
     while rodando:
@@ -108,9 +111,14 @@ def executar_jogo(nome):
         teclas = pygame.key.get_pressed()
         carro_jogador.mover(teclas, street.obter_limites_pista())
         deslocamento_linhas = street.atualizar_pista(deslocamento_linhas)
+        obstaculos, contador_spawn = street.atualizar_obstaculos(obstaculos, contador_spawn)
 
         street.desenhar_pista(tela, deslocamento_linhas)
+        street.desenhar_obstaculos(tela, obstaculos)
         carro_jogador.desenhar(tela)
+
+        if carro_jogador.checar_colisao(street.obter_hitboxes_obstaculos(obstaculos)):
+            rodando = False
 
         desenhar_texto("Pressione ESC para encerrar sua vez", FONTE_SCORE, BRANCO, 10, 10, centralizado=False)
         desenhar_texto(f"Jogador: {nome}", FONTE_SCORE, BRANCO, 10, 35, centralizado=False)

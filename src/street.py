@@ -1,4 +1,5 @@
 import pygame
+import random
 
 LARGURA_TELA = 800
 ALTURA_TELA = 600
@@ -8,6 +9,7 @@ TITULO_JOGO = "TOP RACE"
 BRANCO = (255, 255, 255)
 PRETO = (0, 0, 0)
 CINZA = (100, 100, 100)
+VERMELHO_OBSTACULO = (200, 30, 30)
 
 # CONFIGURAÇÕES DA ESTRADA
 LARGURA_ESTRADA = 450
@@ -17,6 +19,11 @@ COMPRIMENTO_LINHA = 50
 ESPACO_LINHA = 35
 VELOCIDADE_PISTA = 8
 
+# CONFIGURAÇÕES DOS OBSTÁCULOS
+LARGURA_OBSTACULO = 60
+ALTURA_OBSTACULO = 40
+VELOCIDADE_OBSTACULO = 8
+INTERVALO_SPAWN = 60
 
 def criar_tela():
     tela = pygame.display.set_mode((LARGURA_TELA, ALTURA_TELA))
@@ -50,3 +57,36 @@ def desenhar_pista(tela, deslocamento_linhas):
         x_faixa = (LARGURA_TELA // 2) - (largura_faixa // 2)
         pygame.draw.rect(tela, BRANCO, (x_faixa, y, largura_faixa, COMPRIMENTO_LINHA))
         y += COMPRIMENTO_LINHA + ESPACO_LINHA
+
+
+def criar_obstaculo():
+    x_min = X_ESTRADA
+    x_max = X_ESTRADA + LARGURA_ESTRADA - LARGURA_OBSTACULO
+    x = random.randint(x_min, x_max)
+    return pygame.Rect(x, -ALTURA_OBSTACULO, LARGURA_OBSTACULO, ALTURA_OBSTACULO)
+
+
+def atualizar_obstaculos(obstaculos, contador_spawn):
+    # Move cada obstáculo para baixo
+    for obstaculo in obstaculos:
+        obstaculo.y += VELOCIDADE_OBSTACULO
+
+    # Remove obstáculos que já saíram completamente da tela
+    obstaculos = [o for o in obstaculos if o.top < ALTURA_TELA]
+
+    # Controla o tempo até o próximo obstáculo aparecer
+    contador_spawn += 1
+    if contador_spawn >= INTERVALO_SPAWN:
+        obstaculos.append(criar_obstaculo())
+        contador_spawn = 0
+
+    return obstaculos, contador_spawn
+
+
+def desenhar_obstaculos(tela, obstaculos):
+    for obstaculo in obstaculos:
+        pygame.draw.rect(tela, VERMELHO_OBSTACULO, obstaculo)
+
+
+def obter_hitboxes_obstaculos(obstaculos):
+    return list(obstaculos)
