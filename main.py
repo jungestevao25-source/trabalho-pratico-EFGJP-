@@ -111,7 +111,7 @@ def executar_jogo(nome):
         teclas = pygame.key.get_pressed()
         carro_jogador.mover(teclas, street.obter_limites_pista())
         deslocamento_linhas = street.atualizar_pista(deslocamento_linhas)
-        obstaculos, contador_spawn = street.atualizar_obstaculos(obstaculos, contador_spawn)
+        obstaculos, contador_spawn = street.atualizar_obstaculos(obstaculos, contador_spawn, pontos)
 
         street.desenhar_pista(tela, deslocamento_linhas)
         street.desenhar_obstaculos(tela, obstaculos)
