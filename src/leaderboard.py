@@ -1,7 +1,7 @@
 import csv
 import os
 
-ARQUIVO = "leaderboard.csv"
+ARQUIVO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "leaderboard.csv"))
 
 
 def carregar_leaderboard():

@@ -4,7 +4,7 @@ Esta pasta concentra documentos de planejamento e apoio ao projeto.
 
 ## Evolucao recente
 
-Na branch `jogo.v1`, o jogo passou a contar com sistema de leaderboard persistente em `leaderboard.csv` na raiz do projeto e tela de ranking acessada pela tecla `TAB`.
+Na branch `jogo.v1`, o jogo passou a contar com sistema de leaderboard persistente em `data/leaderboard.csv` e tela de ranking acessada pela tecla `TAB`.
 
 ## Arquivos
 
