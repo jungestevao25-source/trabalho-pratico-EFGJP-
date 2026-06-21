@@ -1,11 +1,28 @@
 import pygame
 
+from src.config import CAMINHO_SPRITE_JOGADOR
+
+LARGURA_CARRO = 70
+ALTURA_CARRO = 100
+
 
 class Carro:
+    # Cache do sprite para não recarregar/escalar a imagem em todo frame
+    _sprite_base = None
+
     def __init__(self, x, y):
-        self.rect = pygame.Rect(x, y, 40, 70)
-        self.cor = (0, 128, 255)
+        self.rect = pygame.Rect(x, y, LARGURA_CARRO, ALTURA_CARRO)
         self.velocidade = 6
+        self.sprite = Carro._carregar_sprite()
+
+    @classmethod
+    def _carregar_sprite(cls):
+        if cls._sprite_base is None:
+            imagem = pygame.image.load(CAMINHO_SPRITE_JOGADOR).convert_alpha()
+            cls._sprite_base = pygame.transform.smoothscale(
+                imagem, (LARGURA_CARRO, ALTURA_CARRO)
+            )
+        return cls._sprite_base
 
     def mover(self, teclas, limite_pista):
         limite_esq, limite_dir, limite_cima, limite_baixo = limite_pista
@@ -23,4 +40,4 @@ class Carro:
         return self.rect.collidelist(hitboxes_obstaculos) != -1
 
     def desenhar(self, tela):
-        pygame.draw.rect(tela, self.cor, self.rect)
+        tela.blit(self.sprite, self.rect)
