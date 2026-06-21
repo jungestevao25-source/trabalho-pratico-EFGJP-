@@ -1,6 +1,8 @@
 import pygame
 import random
 
+from src.config import CAMINHO_SPRITE_OBSTACULO
+
 LARGURA_TELA = 800
 ALTURA_TELA = 600
 FPS = 60
@@ -20,8 +22,8 @@ ESPACO_LINHA = 35
 VELOCIDADE_PISTA = 8
 
 # CONFIGURAÇÕES DOS OBSTÁCULOS
-LARGURA_OBSTACULO = 60
-ALTURA_OBSTACULO = 40
+LARGURA_OBSTACULO = 44
+ALTURA_OBSTACULO = 85
 VELOCIDADE_OBSTACULO = 8
 INTERVALO_SPAWN = 60
 
@@ -45,6 +47,18 @@ CHANCE_SPAWN_DUPLO = 0.35
 #Espaço minimo de pssagem que sempre fica livre entro os dois obstaculos.
 FOLGA_MINIMA_PASSAGEM = 110
 
+# Cache do sprite do obstáculo (carregado/escalado uma única vez)
+_SPRITE_OBSTACULO = None
+
+
+def _obter_sprite_obstaculo():
+    global _SPRITE_OBSTACULO
+    if _SPRITE_OBSTACULO is None:
+        imagem = pygame.image.load(CAMINHO_SPRITE_OBSTACULO).convert_alpha()
+        _SPRITE_OBSTACULO = pygame.transform.smoothscale(
+            imagem, (LARGURA_OBSTACULO, ALTURA_OBSTACULO)
+        )
+    return _SPRITE_OBSTACULO
 
 
 def criar_tela():
@@ -169,8 +183,9 @@ def atualizar_obstaculos(obstaculos, contador_spawn, pontos):
 
 
 def desenhar_obstaculos(tela, obstaculos):
+    sprite = _obter_sprite_obstaculo()
     for obstaculo in obstaculos:
-        pygame.draw.rect(tela, VERMELHO_OBSTACULO, obstaculo["rect"])
+        tela.blit(sprite, obstaculo["rect"])
 
 
 def obter_hitboxes_obstaculos(obstaculos):
