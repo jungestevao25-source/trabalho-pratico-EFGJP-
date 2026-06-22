@@ -1,3 +1,32 @@
-src/__pycache__
-/tests/__pycache__
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Dados de jogo gerados localmente (não versionar pontuações reais de jogadores)
 data/leaderboard.csv

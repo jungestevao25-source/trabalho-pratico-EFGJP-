@@ -129,7 +129,7 @@ Exemplos:
 
 Condição de derrota ou encerramento:
 
-> - Não ficar um primeiro lugar no ranking
+> - Perder todas as 3 vidas ao colidir com obstáculos (cada colisão remove uma vida, e ao zerar o jogo encerra a rodada atual)
 
 ## 9. Elementos previstos no jogo
 
@@ -190,11 +190,11 @@ Exemplo:
 
 Controles do grupo:
 
-> - W: Mover Para Frente
-> - S: Mover Para Trás
-> - A: Mover Para a Esquerda
-> - D: Mover Para a Direita
-> - ESC: Sair do Jogo
+> - Seta para cima: mover para frente
+> - Seta para baixo: mover para trás
+> - Seta para esquerda: mover para a esquerda
+> - Seta para direita: mover para a direita
+> - ESC: sair do jogo / encerrar a rodada atual
 
 ## 11. Organização inicial do código
 
@@ -234,6 +234,24 @@ Recursos previstos:
 Caso não pretenda utilizar recursos externos, escreva:
 
 > - Não pretendemos utilizar recursos externos.
+
+## 12. Estruturas de dados que poderão ser utilizadas
+
+> - Lista de dicionários: cada obstáculo é representado como um dicionário `{"rect": pygame.Rect, "velocidade": int}`, agrupados em uma lista que é percorrida a cada frame para movimento e colisão.
+> - CSV (arquivo de texto estruturado): o leaderboard é persistido em `data/leaderboard.csv` com campos `nome` e `pontos`, lido e gravado via módulo `csv` do Python.
+
+## 12b. Testes planejados
+
+> - Testar se o carro inicia na posição correta.
+> - Testar se o carro se move corretamente ao pressionar cada tecla direcional.
+> - Testar se o carro respeita os limites da pista (esquerda, direita, cima, baixo).
+> - Testar se a colisão entre carro e obstáculo é detectada corretamente.
+> - Testar se obstáculos gerados ficam dentro dos limites da pista.
+> - Testar se o nível de dificuldade aumenta conforme a pontuação.
+> - Testar se velocidade e intervalo de spawn respeitam os limites máximo e mínimo.
+> - Testar se o leaderboard salva e carrega corretamente em arquivo CSV.
+> - Testar se o leaderboard mantém apenas os 10 melhores em ordem decrescente.
+> - Testar se as constantes de configuração têm valores válidos (tela, FPS, cores, caminhos de assets).
 
 ## 13. Principais dificuldades esperadas
 

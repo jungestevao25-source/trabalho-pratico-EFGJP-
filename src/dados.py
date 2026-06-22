@@ -1,33 +1,34 @@
+"""Persistência do placar de líderes (top 10) em data/leaderboard.csv."""
+
+import csv
 import os
 
-
-def carregar_recorde(caminho):
-    """Carrega o recorde do arquivo indicado. Retorna 0 se não existir ou em erro."""
-    try:
-        if not os.path.exists(caminho):
-            # garante diretório
-            pasta = os.path.dirname(caminho)
-            if pasta and not os.path.exists(pasta):
-                os.makedirs(pasta, exist_ok=True)
-            with open(caminho, "w", encoding="utf-8") as f:
-                f.write("0")
-            return 0
-
-        with open(caminho, "r", encoding="utf-8") as f:
-            texto = f.read().strip()
-            return int(texto) if texto.isdigit() else 0
-    except Exception:
-        return 0
+ARQUIVO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "leaderboard.csv"))
 
 
-def salvar_recorde(caminho, valor):
-    """Salva o recorde (int) no arquivo indicado."""
-    try:
-        pasta = os.path.dirname(caminho)
-        if pasta and not os.path.exists(pasta):
-            os.makedirs(pasta, exist_ok=True)
-        with open(caminho, "w", encoding="utf-8") as f:
-            f.write(str(int(valor)))
-    except Exception:
-        # falhar silenciosamente é aceitável aqui; o jogo continua
-        pass
+def carregar_leaderboard():
+    """Lê o CSV e retorna a lista de pontuações (lista vazia se não existir)."""
+    if not os.path.exists(ARQUIVO):
+        return []
+
+    with open(ARQUIVO, newline='', encoding='utf-8') as f:
+        return [
+            {"nome": linha["nome"], "pontos": int(linha["pontos"])}
+            for linha in csv.DictReader(f)
+        ]
+
+
+def salvar_leaderboard(leaderboard):
+    """Sobrescreve o CSV com a lista de pontuações fornecida."""
+    with open(ARQUIVO, "w", newline='', encoding='utf-8') as f:
+        escritor = csv.DictWriter(f, fieldnames=["nome", "pontos"])
+        escritor.writeheader()
+        escritor.writerows(leaderboard)
+
+
+def adicionar_pontuacao(nome, pontos):
+    """Insere uma pontuação, reordena e mantém apenas o top 10."""
+    leaderboard = carregar_leaderboard()
+    leaderboard.append({"nome": nome, "pontos": pontos})
+    leaderboard = sorted(leaderboard, key=lambda x: x["pontos"], reverse=True)[:10]
+    salvar_leaderboard(leaderboard)
