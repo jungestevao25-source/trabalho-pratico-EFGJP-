@@ -133,4 +133,4 @@ Os sons foram criados pelo grupo no FL Studio — não há dependência de bibli
 - Fernando Pereira de Vasconcellos
 - Guilherme Gonçalves Meireles
 - João Pedro Spósito Pereira Cézar
-- Paulo Henrique Pereira de Sousa
+- Paulo Henrique Pereira de Souza
